@@ -1,0 +1,888 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acentos y Puntuación - Lección 1 - Griego Koiné</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* RESET Y VARIABLES */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #4cc9f0;
+            --success: #2ecc71;
+            --warning: #ffd43b;
+            --danger: #e74c3c;
+            --light: #f8f9fa;
+            --light-blue: #e7f5ff;
+            --light-yellow: #fff9db;
+            --light-green: #d3f9d8;
+            --light-red: #ffe3e3;
+            --dark: #212529;
+            --gray: #6c757d;
+            --border-radius: 12px;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #f5f7ff;
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .koine-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        .koine-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2.5rem 0;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .koine-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .koine-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .koine-tag {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        /* LAYOUT GRID */
+        .koine-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 992px) {
+            .koine-grid {
+                grid-template-columns: 3fr 2fr;
+            }
+        }
+
+        /* TARJETAS */
+        .koine-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.8rem;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            height: 100%;
+            margin-bottom: 0;
+        }
+
+        .koine-card:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+
+        .koine-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .koine-card-title i {
+            font-size: 1.4rem;
+        }
+
+        /* BORDES DE SECCIONES */
+        .koine-card-punctuation {
+            border-top: 5px solid var(--primary);
+        }
+
+        .koine-card-diacritic {
+            border-top: 5px solid var(--accent);
+        }
+
+        .koine-card-accents {
+            border-top: 5px solid var(--secondary);
+        }
+
+        .koine-card-summary {
+            border-top: 5px solid #4cc9f0;
+        }
+
+        /* LISTAS */
+        .koine-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .koine-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .koine-list li:last-child {
+            border-bottom: none;
+        }
+
+        .koine-list li i {
+            color: var(--primary);
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        /* CAJAS DESTACADAS */
+        .koine-highlight {
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .koine-warning {
+            background-color: var(--light-yellow);
+            border-left: 5px solid var(--warning);
+        }
+
+        .koine-note {
+            background-color: var(--light-blue);
+            border-left: 5px solid var(--accent);
+        }
+
+        /* EJEMPLOS GRIEGOS */
+        .koine-example {
+            background-color: #f1f3f9;
+            border-left: 5px solid var(--secondary);
+            font-family: 'Georgia', serif;
+            font-size: 1.2rem;
+            padding: 1.2rem;
+            text-align: center;
+            margin: 1rem 0;
+            border-radius: var(--border-radius);
+        }
+
+        /* TIPOS DE ACENTO */
+        .koine-accent {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            margin: 0 0.3rem;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* GRID DE ACENTOS */
+        .koine-accent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .koine-accent-item {
+            background-color: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .koine-accent-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* SECCIÓN QUIZ */
+        .koine-quiz {
+            margin: 3rem 0;
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .koine-quiz-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .koine-question {
+            background-color: var(--light);
+            padding: 1.8rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.8rem;
+            border-left: 5px solid var(--primary);
+        }
+
+        .koine-question p {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--dark);
+        }
+
+        .koine-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .koine-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            background-color: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .koine-option:hover {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.03);
+        }
+
+        .koine-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.08);
+        }
+
+        .koine-option input {
+            display: none;
+        }
+
+        .koine-option-label {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .koine-option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .koine-option.selected .koine-option-letter {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* BOTONES */
+        .koine-btn {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
+        }
+
+        .koine-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(67, 97, 238, 0.3);
+        }
+
+        .koine-btn-full {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        /* RESULTADOS */
+        .koine-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .koine-result-correct {
+            background-color: var(--light-green);
+            color: #0c6e1f;
+            border-left: 5px solid var(--success);
+            display: block;
+        }
+
+        .koine-result-incorrect {
+            background-color: var(--light-red);
+            color: #c92a2a;
+            border-left: 5px solid var(--danger);
+            display: block;
+        }
+
+        .koine-score {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            border-radius: var(--border-radius);
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        /* BARRA DE PROGRESO */
+        .koine-progress {
+            width: 100%;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            height: 12px;
+            overflow: hidden;
+        }
+
+        .koine-progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.8s ease;
+        }
+
+        /* RESUMEN RÁPIDO */
+        .koine-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .koine-summary-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .koine-summary-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* FOOTER */
+        .koine-footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .koine-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .koine-card-title {
+                font-size: 1.4rem;
+            }
+            
+            .koine-quiz {
+                padding: 1.5rem;
+            }
+            
+            .koine-quiz-title {
+                font-size: 1.6rem;
+            }
+            
+            .koine-btn {
+                padding: 0.9rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .koine-accent-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .koine-summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .koine-container {
+                padding: 0 15px;
+            }
+            
+            .koine-header {
+                padding: 1.8rem 0;
+            }
+            
+            .koine-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .koine-card {
+                padding: 1.3rem;
+            }
+            
+            .koine-question {
+                padding: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="koine-container">
+        <!-- HEADER -->
+        <header class="koine-header">
+            <h1>Acentos y Puntuación</h1>
+            <p class="koine-subtitle">Lección 1: Dominando los fundamentos del griego koiné</p>
+            <div class="koine-tag">Griego Koiné • Nivel Principiante</div>
+        </header>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="koine-grid">
+            <!-- COLUMNA IZQUIERDA -->
+            <div class="koine-main">
+                <!-- PUNTUACIÓN -->
+                <div class="koine-card koine-card-punctuation">
+                    <h2 class="koine-card-title"><i class="fas fa-comma"></i> Puntuación en Griego</h2>
+                    <p>La puntuación en griego koiné tiene algunas diferencias importantes con el español:</p>
+                    
+                    <ul class="koine-list">
+                        <li><i class="fas fa-check-circle"></i> <strong>Coma (,):</strong> Igual que en español (ej. θεός,)</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>Punto (.):</strong> Igual que en español (ej. θεός.)</li>
+                        <li><i class="fas fa-exclamation-circle"></i> <strong>Punto y coma (;):</strong> <strong>¡Diferente!</strong> En griego indica signo de interrogación (ej. θεός;)</li>
+                        <li><i class="fas fa-exchange-alt"></i> <strong>Signo de interrogación (?):</strong> Se usa como punto y coma en español</li>
+                    </ul>
+                    
+                    <div class="koine-highlight koine-warning">
+                        <strong><i class="fas fa-exclamation-triangle"></i> Nota importante:</strong> Debes acostumbrarte a que el punto y coma (;) en griego representa un signo de interrogación.
+                    </div>
+                </div>
+
+                <!-- ACENTOS -->
+                <div class="koine-card koine-card-accents">
+                    <h2 class="koine-card-title"><i class="fas fa-accent-grave"></i> Acentos en Griego</h2>
+                    <p>Casi todas las palabras en griego tienen un acento que marca la sílaba tónica:</p>
+                    
+                    <div class="koine-accent-grid">
+                        <div class="koine-accent-item">
+                            <div class="koine-accent">αἰτέω</div>
+                            <p style="margin-top: 0.5rem; font-weight: 600;">Acento agudo</p>
+                            <p style="font-size: 0.9rem; color: var(--gray);">Tonos ascendente (originalmente)</p>
+                        </div>
+                        <div class="koine-accent-item">
+                            <div class="koine-accent">καὶ θεὸς</div>
+                            <p style="margin-top: 0.5rem; font-weight: 600;">Acento grave</p>
+                            <p style="font-size: 0.9rem; color: var(--gray);">Tono descendente (originalmente)</p>
+                        </div>
+                        <div class="koine-accent-item">
+                            <div class="koine-accent">ἁγνῶς</div>
+                            <p style="margin-top: 0.5rem; font-weight: 600;">Acento circunflejo</p>
+                            <p style="font-size: 0.9rem; color: var(--gray);">Tono ascendente-descendente (originalmente)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="koine-highlight koine-note">
+                        <strong><i class="fas fa-info-circle"></i> Hoy en día:</strong> No se nota diferencia de pronunciación entre los acentos. Sirven para marcar la sílaba tónica y diferenciar palabras.
+                    </div>
+                    
+                    <h3 style="margin-top: 1.8rem; margin-bottom: 1rem; color: var(--primary);">Utilidad de los Acentos:</h3>
+                    <ul class="koine-list">
+                        <li><i class="fas fa-volume-up"></i> <strong>Pronunciación uniforme:</strong> Mantienen consistencia en clase</li>
+                        <li><i class="fas fa-brain"></i> <strong>Memorización:</strong> Facilitan el aprendizaje de vocabulario</li>
+                        <li><i class="fas fa-code-branch"></i> <strong>Diferenciación:</strong> Algunas palabras solo se diferencian por el acento</li>
+                    </ul>
+                    
+                    <div class="koine-example">
+                        <div style="margin-bottom: 0.5rem;"><span class="koine-accent">τίς</span> = "¿quién?" (interrogativo)</div>
+                        <div><span class="koine-accent">τις</span> = "alguien" (indefinido)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA -->
+            <div class="koine-side">
+                <!-- MARCAS DIACRÍTICAS -->
+                <div class="koine-card koine-card-diacritic">
+                    <h2 class="koine-card-title"><i class="fas fa-font"></i> Marcas Diacríticas</h2>
+                    <ul class="koine-list">
+                        <li><i class="fas fa-umlaut"></i> <strong>Diéresis (¨):</strong> Indica que dos vocales seguidas NO forman un diptongo</li>
+                        <li><i class="fas fa-apostrophe"></i> <strong>Apostrofo (᾿):</strong> Marca la eliminación de una vocal final cuando la siguiente palabra comienza con vocal.</li>
+                    </ul>
+                    
+                    <div class="koine-example">
+                        ἀπὸ ἐμοῦ → ἀπ᾽ ἐμοῦ
+                        <div style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--gray);">(similar a "can't" en inglés)</div>
+                    </div>
+                    
+                    <div class="koine-highlight koine-note" style="margin-top: 1.5rem;">
+                        <strong><i class="fas fa-lightbulb"></i> Tip:</strong> Presta atención a estas marcas al leer textos griegos antiguos.
+                    </div>
+                </div>
+
+                <!-- RESUMEN -->
+                <div class="koine-card koine-card-summary">
+                    <h2 class="koine-card-title"><i class="fas fa-clipboard-list"></i> Resumen Rápido</h2>
+                    
+                    <div class="koine-summary-grid">
+                        <div class="koine-summary-item">
+                            <div class="koine-summary-icon" style="background-color: var(--primary);">
+                                <i class="fas fa-comma" style="color: white; font-size: 0.9rem;"></i>
+                            </div>
+                            <div>
+                                <strong>Punto y coma (;) = ¿?</strong>
+                            </div>
+                        </div>
+                        <div class="koine-summary-item">
+                            <div class="koine-summary-icon" style="background-color: var(--secondary);">
+                                <i class="fas fa-accent-grave" style="color: white; font-size: 0.9rem;"></i>
+                            </div>
+                            <div>
+                                <strong>Acentos = sílaba tónica</strong>
+                            </div>
+                        </div>
+                        <div class="koine-summary-item">
+                            <div class="koine-summary-icon" style="background-color: #4cc9f0;">
+                                <i class="fas fa-apostrophe" style="color: white; font-size: 0.9rem;"></i>
+                            </div>
+                            <div>
+                                <strong>Apostrofo = contracción</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(0,0,0,0.1);">
+                        <p style="font-size: 0.9rem; color: var(--gray);">Estos conceptos son fundamentales para leer correctamente el griego koiné. Practícalos regularmente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUIZ -->
+        <section class="koine-quiz">
+            <h2 class="koine-quiz-title"><i class="fas fa-pencil-alt"></i> Comprueba tu Conocimiento</h2>
+            
+            <!-- BARRA DE PROGRESO -->
+            <div class="koine-progress">
+                <div class="koine-progress-bar" id="progressBar"></div>
+            </div>
+            
+            <!-- PREGUNTA 1 -->
+            <div class="koine-question">
+                <p>1. ¿Qué indica el acento agudo en griego?</p>
+                <div class="koine-options">
+                    <div class="koine-option" data-question="1" data-option="a">
+                        <label class="koine-option-label">
+                            <span class="koine-option-letter">A</span>
+                            <span>Que el tono baja ligeramente</span>
+                        </label>
+                    </div>
+                    <div class="koine-option" data-question="1" data-option="b">
+                        <label class="koine-option-label">
+                            <span class="koine-option-letter">B</span>
+                            <span>Que el tono sube ligeramente</span>
+                        </label>
+                    </div>
+                    <div class="koine-option" data-question="1" data-option="c">
+                        <label class="koine-option-label">
+                            <span class="koine-option-letter">C</span>
+                            <span>Que el tono sube y luego baja</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="koine-result" id="result1"></div>
+            </div>
+
+            <!-- PREGUNTA 2 -->
+            <div class="koine-question">
+                <p>2. ¿Qué marca diacrítica se usa para indicar la eliminación de una vocal?</p>
+                <div class="koine-options">
+                    <div class="koine-option" data-question="2" data-option="a">
+                        <label class="koine-option-label">
+                            <span class="koine-option-letter">A</span>
+                            <span>Diéresis</span>
+                        </label>
+                    </div>
+                    <div class="koine-option" data-question="2" data-option="b">
+                        <label class="koine-option-label">
+                            <span class="koine-option-letter">B</span>
+                            <span>Acento circunflejo</span>
+                        </label>
+                    </div>
+                    <div class="koine-option" data-question="2" data-option="c">
+                        <label class="koine-option-label">
+                            <span class="koine-option-letter">C</span>
+                            <span>Apostrofo</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="koine-result" id="result2"></div>
+            </div>
+
+            <!-- PREGUNTA 3 -->
+            <div class="koine-question">
+                <p>3. ¿Qué palabra significa "¿quién?"?</p>
+                <div class="koine-options">
+                    <div class="koine-option" data-question="3" data-option="a">
+                        <label class="koine-option-label">
+                            <span class="koine-option-letter">A</span>
+                            <span>τις</span>
+                        </label>
+                    </div>
+                    <div class="koine-option" data-question="3" data-option="b">
+                        <label class="koine-option-label">
+                            <span class="koine-option-letter">B</span>
+                            <span>τίς</span>
+                        </label>
+                    </div>
+                    <div class="koine-option" data-question="3" data-option="c">
+                        <label class="koine-option-label">
+                            <span class="koine-option-letter">C</span>
+                            <span>τισ</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="koine-result" id="result3"></div>
+            </div>
+
+            <!-- BOTONES -->
+            <button class="koine-btn koine-btn-full" id="checkAnswersBtn">
+                <i class="fas fa-check-circle"></i> Comprobar Respuestas
+            </button>
+            
+            <div class="koine-score" id="scoreDisplay"></div>
+            
+            <button class="koine-btn koine-btn-full" id="resetQuizBtn" style="display: none; background: linear-gradient(to right, #495057, #6c757d);">
+                <i class="fas fa-redo"></i> Reintentar Quiz
+            </button>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="koine-footer">
+            <p>Lección 1: Acentos y Puntuación en Griego Koiné</p>
+            <p>© 2023 Curso de Griego Koiné - Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos del DOM
+            const quizOptions = document.querySelectorAll('.koine-option');
+            const checkAnswersBtn = document.getElementById('checkAnswersBtn');
+            const resetQuizBtn = document.getElementById('resetQuizBtn');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const progressBar = document.getElementById('progressBar');
+            
+            // Estado del quiz
+            let userAnswers = {
+                q1: null,
+                q2: null,
+                q3: null
+            };
+            
+            const correctAnswers = {
+                q1: 'b',
+                q2: 'c',
+                q3: 'b'
+            };
+            
+            // Eventos para opciones del quiz
+            quizOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.getAttribute('data-question');
+                    const selectedOption = this.getAttribute('data-option');
+                    
+                    // Deseleccionar otras opciones de la misma pregunta
+                    document.querySelectorAll(`.koine-option[data-question="${question}"]`).forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Seleccionar esta opción
+                    this.classList.add('selected');
+                    
+                    // Guardar respuesta
+                    userAnswers[`q${question}`] = selectedOption;
+                    
+                    // Actualizar barra de progreso
+                    updateProgressBar();
+                });
+            });
+            
+            // Actualizar barra de progreso
+            function updateProgressBar() {
+                const answeredCount = Object.values(userAnswers).filter(answer => answer !== null).length;
+                const totalQuestions = Object.keys(userAnswers).length;
+                const progressPercentage = (answeredCount / totalQuestions) * 100;
+                
+                progressBar.style.width = `${progressPercentage}%`;
+            }
+            
+            // Comprobar respuestas
+            checkAnswersBtn.addEventListener('click', function() {
+                let score = 0;
+                const totalQuestions = Object.keys(correctAnswers).length;
+                
+                // Evaluar cada pregunta
+                for (const question in correctAnswers) {
+                    const userAnswer = userAnswers[question];
+                    const correctAnswer = correctAnswers[question];
+                    const resultElement = document.getElementById(`result${question.slice(1)}`);
+                    
+                    if (userAnswer === correctAnswer) {
+                        resultElement.textContent = "✓ ¡Correcto!";
+                        resultElement.className = "koine-result koine-result-correct";
+                        score++;
+                    } else if (userAnswer === null) {
+                        resultElement.textContent = "No has seleccionado una respuesta. La correcta es la opción " + 
+                            (correctAnswer === 'a' ? 'A' : correctAnswer === 'b' ? 'B' : 'C');
+                        resultElement.className = "koine-result koine-result-incorrect";
+                    } else {
+                        resultElement.textContent = "✗ Incorrecto. La respuesta correcta es la opción " + 
+                            (correctAnswer === 'a' ? 'A' : correctAnswer === 'b' ? 'B' : 'C');
+                        resultElement.className = "koine-result koine-result-incorrect";
+                    }
+                }
+                
+                // Mostrar puntuación
+                const percentage = Math.round((score/totalQuestions)*100);
+                let message = "";
+                
+                if (percentage === 100) {
+                    message = `¡Perfecto! ${score} de ${totalQuestions} respuestas correctas (${percentage}%)`;
+                    scoreDisplay.style.background = "linear-gradient(to right, #d3f9d8, #b2f2bb)";
+                } else if (percentage >= 70) {
+                    message = `¡Bien hecho! ${score} de ${totalQuestions} respuestas correctas (${percentage}%)`;
+                    scoreDisplay.style.background = "linear-gradient(to right, #fff3bf, #ffec99)";
+                } else {
+                    message = `Necesitas practicar más: ${score} de ${totalQuestions} respuestas correctas (${percentage}%)`;
+                    scoreDisplay.style.background = "linear-gradient(to right, #ffc9c9, #ffa8a8)";
+                }
+                
+                scoreDisplay.textContent = message;
+                scoreDisplay.style.display = 'block';
+                
+                // Deshabilitar opciones
+                quizOptions.forEach(option => {
+                    option.style.pointerEvents = 'none';
+                });
+                
+                // Cambiar botones
+                checkAnswersBtn.style.display = 'none';
+                resetQuizBtn.style.display = 'flex';
+            });
+            
+            // Reiniciar quiz
+            resetQuizBtn.addEventListener('click', function() {
+                // Reiniciar respuestas
+                userAnswers = {
+                    q1: null,
+                    q2: null,
+                    q3: null
+                };
+                
+                // Limpiar selecciones
+                quizOptions.forEach(option => {
+                    option.classList.remove('selected');
+                    option.style.pointerEvents = 'auto';
+                });
+                
+                // Limpiar resultados
+                for (let i = 1; i <= 3; i++) {
+                    const resultElement = document.getElementById(`result${i}`);
+                    resultElement.textContent = '';
+                    resultElement.className = 'koine-result';
+                }
+                
+                // Ocultar puntuación
+                scoreDisplay.style.display = 'none';
+                
+                // Reiniciar barra de progreso
+                progressBar.style.width = '0%';
+                
+                // Restaurar botones
+                checkAnswersBtn.style.display = 'flex';
+                resetQuizBtn.style.display = 'none';
+            });
+            
+            // Inicializar barra de progreso
+            updateProgressBar();
+        });
+    </script>
+</body>
+</html>

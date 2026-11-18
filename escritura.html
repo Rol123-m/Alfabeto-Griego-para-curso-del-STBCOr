@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo Bíblico Interactivo - Juan 1:1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Merriweather:wght@400;700&family=Noto+Sans+Symbols:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #f39c12;
+            --success: #27ae60;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --gray: #6c757d;
+            --light-bg: #f1f5f9;
+            --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e3e7ed 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Ejemplo bíblico */
+        .bible-example {
+            background: linear-gradient(135deg, var(--primary), #1a252f);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bible-example::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .bible-example h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            color: white;
+        }
+
+        .bible-example h3::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .bible-example > p {
+            opacity: 0.9;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        /* Texto griego */
+        .greek-text {
+            font-family: 'Georgia', 'Noto Sans Symbols', serif;
+            font-size: 2rem;
+            line-height: 1.8;
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            border-left: 5px solid var(--accent);
+            position: relative;
+            min-height: 180px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .greek-word {
+            cursor: pointer;
+            position: relative;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: var(--transition);
+            font-weight: 500;
+            display: inline-block;
+            margin: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+        }
+
+        .greek-word:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            border-color: rgba(243, 156, 18, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .greek-word.active {
+            background: rgba(243, 156, 18, 0.3);
+            color: white;
+            border-color: var(--accent);
+            animation: pulse 1s ease;
+        }
+
+        .greek-word .word-number {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Controles */
+        .verse-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .verse-btn {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .verse-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .verse-btn.primary {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .verse-btn.primary:hover {
+            background: #e67e22;
+            box-shadow: 0 8px 20px rgba(243, 156, 18, 0.3);
+        }
+
+        /* Contenido oculto */
+        .hidden-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s ease;
+            margin-top: 0;
+            opacity: 0;
+        }
+
+        .hidden-content.show {
+            max-height: 800px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .translation-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid var(--success);
+        }
+
+        .translation-box h4 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .translation-box p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .translation-box em {
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+        }
+
+        .grammar-analysis {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .grammar-analysis p {
+            margin-bottom: 12px;
+            padding-left: 10px;
+            border-left: 3px solid rgba(52, 152, 219, 0.5);
+        }
+
+        /* Tooltip */
+        .word-tooltip {
+            position: fixed;
+            background: white;
+            color: var(--dark);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+            max-width: 320px;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            border-top: 5px solid var(--accent);
+        }
+
+        .word-tooltip.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .tooltip-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tooltip-greek {
+            font-family: 'Georgia', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .tooltip-close {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .tooltip-content p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tooltip-label {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 100px;
+        }
+
+        .tooltip-value {
+            color: var(--dark);
+        }
+
+        /* Animaciones */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        .slide-in {
+            animation: slideIn 0.5s ease;
+        }
+
+        /* Botón de volver */
+        .back-btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: #1a252f;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Progress bar */
+        .verse-progress {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--accent), var(--success));
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .bible-example {
+                padding: 25px;
+            }
+            
+            .greek-text {
+                font-size: 1.6rem;
+                padding: 20px;
+                min-height: 150px;
+            }
+            
+            .verse-controls {
+                flex-direction: column;
+            }
+            
+            .verse-btn {
+                width: 100%;
+                min-width: unset;
+            }
+            
+            .word-tooltip {
+                max-width: 280px;
+                left: 50% !important;
+                transform: translateX(-50%) translateY(20px) scale(0.95);
+            }
+            
+            .word-tooltip.show {
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .bible-example {
+                padding: 20px;
+            }
+            
+            .bible-example h3 {
+                font-size: 1.5rem;
+            }
+            
+            .greek-text {
+                font-size: 1.3rem;
+                padding: 15px;
+            }
+            
+            .greek-word {
+                padding: 6px 10px;
+                margin: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Ejemplo bíblico interactivo -->
+        <div class="bible-example" id="bibleExample">
+            <h3><i class="fas fa-bible"></i> Ejemplo Bíblico Interactivo</h3>
+            <p>Explora el versículo más famoso del Nuevo Testamento en griego original. Haz clic en cada palabra para descubrir su significado:</p>
+            
+            <!-- Barra de progreso -->
+            <div class="verse-progress">
+                <div class="progress-text">Palabras exploradas: <span id="wordsExplored">0</span>/10</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            
+            <!-- Texto griego con palabras interactivas -->
+            <div class="greek-text" id="greekVerse">
+                <!-- Las palabras se insertarán dinámicamente con JavaScript -->
+            </div>
+            
+            <!-- Controles -->
+            <div class="verse-controls">
+                <button class="verse-btn primary" id="readVerseBtn">
+                    <i class="fas fa-play-circle"></i> Escuchar versículo completo
+                </button>
+                <button class="verse-btn" id="showTranslationBtn">
+                    <i class="fas fa-language"></i> Mostrar traducción
+                </button>
+                <button class="verse-btn" id="analyzeGrammarBtn">
+                    <i class="fas fa-search"></i> Analizar gramática
+                </button>
+            </div>
+            
+            <!-- Traducción oculta -->
+            <div class="hidden-content" id="translationContent">
+                <div class="translation-box">
+                    <h4><i class="fas fa-language"></i> Traducción Completa</h4>
+                    <p>"En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios." <em>(Juan 1:1)</em></p>
+                    
+                    <h4 style="margin-top: 20px;"><i class="fas fa-comment-alt"></i> Análisis del Versículo</h4>
+                    <p>Este versículo introduce el Evangelio de Juan y presenta una teología profunda sobre la naturaleza de Cristo como el "Logos" (λόγος) - la Palabra divina que existía desde el principio.</p>
+                    <p>La palabra "Logos" era un término filosófico importante en el mundo grecorromano, y Juan la utiliza para comunicar que Jesús es la expresión perfecta de Dios al mundo.</p>
+                </div>
+            </div>
+            
+            <!-- Análisis gramatical oculto -->
+            <div class="hidden-content" id="grammarContent">
+                <div class="translation-box">
+                    <h4><i class="fas fa-search"></i> Análisis Gramatical</h4>
+                    
+                    <div class="grammar-analysis">
+                        <p><strong>Ἐν ἀρχῇ</strong> - "En el principio" (Preposición + sustantivo dativo femenino)</p>
+                        <p><strong>ἦν</strong> - "era" (Verbo imperfecto, tercera persona singular del verbo εἰμί - ser)</p>
+                        <p><strong>ὁ λόγος</strong> - "el Verbo/Palabra" (Artículo definido + sustantivo nominativo masculino)</p>
+                        <p><strong>καὶ</strong> - "y" (Conjunción coordinante)</p>
+                        <p><strong>πρὸς τὸν θεόν</strong> - "con Dios" (Preposición + artículo + sustantivo acusativo)</p>
+                        <p><strong>θεὸς ἦν ὁ λόγος</strong> - "Dios era el Verbo" (Orden de palabras enfático en griego)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botón para volver -->
+        <div class="back-btn-container">
+            <a href="alfabeto.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Volver al Alfabeto
+            </a>
+        </div>
+    </div>
+
+    <!-- Tooltip para palabras griegas -->
+    <div class="word-tooltip" id="wordTooltip">
+        <div class="tooltip-header">
+            <div class="tooltip-greek" id="tooltipGreek"></div>
+            <button class="tooltip-close" id="tooltipClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="tooltip-content">
+            <p>
+                <span class="tooltip-label">Significado:</span>
+                <span class="tooltip-value" id="tooltipMeaning"></span>
+            </p>
+            <p>
+                <span class="tooltip-label">Pronunciación:</span>
+                <span class="tooltip-value" id="tooltipPronunciation"></span>
+            </p>
+            <p>
+                <span class="tooltip-label">Gramática:</span>
+                <span class="tooltip-value" id="tooltipGrammar"></span>
+            </p>
+            <p>
+                <span class="tooltip-label">Función:</span>
+                <span class="tooltip-value" id="tooltipFunction"></span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Datos del versículo bíblico con información detallada
+        const verseData = {
+            reference: "Juan 1:1",
+            greek: "Ἐν ἀρχῇ ἦν ὁ λόγος, καὶ ὁ λόγος ἦν πρὸς τὸν θεόν, καὶ θεὸς ἦν ὁ λόγος.",
+            pronunciation: "En arjé en jo lógos, kai jo lógos en pros ton theón, kai theós en jo lógos.",
+            translation: "En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios.",
+            words: [
+                { 
+                    id: 1,
+                    greek: "Ἐν", 
+                    meaning: "En", 
+                    pronunciation: "en",
+                    grammar: "Preposición",
+                    function: "Indica posición o situación dentro de algo",
+                    description: "Una de las preposiciones más comunes en griego, indica localización."
+                },
+                { 
+                    id: 2,
+                    greek: "ἀρχῇ", 
+                    meaning: "principio", 
+                    pronunciation: "arjé",
+                    grammar: "Sustantivo dativo femenino",
+                    function: "Objeto indirecto de la preposición",
+                    description: "De ἄρχω (gobernar). Se refiere al comienzo absoluto, el origen."
+                },
+                { 
+                    id: 3,
+                    greek: "ἦν", 
+                    meaning: "era", 
+                    pronunciation: "en",
+                    grammar: "Verbo imperfecto, 3ra persona singular",
+                    function: "Verbo copulativo (ser)",
+                    description: "Forma del verbo εἰμί en tiempo imperfecto, indica acción continua en el pasado."
+                },
+                { 
+                    id: 4,
+                    greek: "ὁ", 
+                    meaning: "el", 
+                    pronunciation: "jo",
+                    grammar: "Artículo definido masculino",
+                    function: "Determina al sustantivo λόγος",
+                    description: "Artículo definido singular masculino en caso nominativo."
+                },
+                { 
+                    id: 5,
+                    greek: "λόγος", 
+                    meaning: "Verbo/Palabra", 
+                    pronunciation: "lógos",
+                    grammar: "Sustantivo nominativo masculino",
+                    function: "Sujeto de la oración",
+                    description: "Término filosófico-teológico clave. Significa palabra, razón, principio divino."
+                },
+                { 
+                    id: 6,
+                    greek: "καὶ", 
+                    meaning: "y", 
+                    pronunciation: "kai",
+                    grammar: "Conjunción coordinante",
+                    function: "Une oraciones de igual importancia",
+                    description: "La conjunción más común en griego, aparece más de 9,000 veces en el NT."
+                },
+                { 
+                    id: 7,
+                    greek: "πρὸς", 
+                    meaning: "con", 
+                    pronunciation: "pros",
+                    grammar: "Preposición",
+                    function: "Indica relación personal íntima",
+                    description: "Literalmente 'hacia', pero aquí indica compañía y relación."
+                },
+                { 
+                    id: 8,
+                    greek: "τὸν", 
+                    meaning: "el", 
+                    pronunciation: "ton",
+                    grammar: "Artículo definido acusativo masculino",
+                    function: "Determina al sustantivo θεόν",
+                    description: "Artículo definido singular masculino en caso acusativo."
+                },
+                { 
+                    id: 9,
+                    greek: "θεόν", 
+                    meaning: "Dios", 
+                    pronunciation: "theón",
+                    grammar: "Sustantivo acusativo masculino",
+                    function: "Objeto directo de la preposición",
+                    description: "Sustantivo que se refiere a la Deidad, Dios Padre."
+                },
+                { 
+                    id: 10,
+                    greek: "θεὸς", 
+                    meaning: "Dios", 
+                    pronunciation: "theós",
+                    grammar: "Sustantivo nominativo masculino",
+                    function: "Sujeto de la última cláusula",
+                    description: "La misma palabra que θεόν, pero en caso nominativo."
+                }
+            ]
+        };
+
+        // Estado de la aplicación
+        let state = {
+            exploredWords: new Set(),
+            currentTooltipWord: null,
+            isReading: false,
+            translationVisible: false,
+            grammarVisible: false
+        };
+
+        // Elementos DOM
+        const greekVerse = document.getElementById('greekVerse');
+        const wordTooltip = document.getElementById('wordTooltip');
+        const tooltipGreek = document.getElementById('tooltipGreek');
+        const tooltipMeaning = document.getElementById('tooltipMeaning');
+        const tooltipPronunciation = document.getElementById('tooltipPronunciation');
+        const tooltipGrammar = document.getElementById('tooltipGrammar');
+        const tooltipFunction = document.getElementById('tooltipFunction');
+        const tooltipClose = document.getElementById('tooltipClose');
+        const readVerseBtn = document.getElementById('readVerseBtn');
+        const showTranslationBtn = document.getElementById('showTranslationBtn');
+        const analyzeGrammarBtn = document.getElementById('analyzeGrammarBtn');
+        const translationContent = document.getElementById('translationContent');
+        const grammarContent = document.getElementById('grammarContent');
+        const wordsExploredEl = document.getElementById('wordsExplored');
+        const progressFill = document.getElementById('progressFill');
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGreekVerse();
+            setupEventListeners();
+            updateProgress();
+            
+            // Efecto de entrada
+            animateVerse();
+        });
+
+        // Renderizar el versículo griego con palabras interactivas
+        function renderGreekVerse() {
+            greekVerse.innerHTML = '';
+            
+            verseData.words.forEach((word, index) => {
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'greek-word fade-in';
+                wordSpan.textContent = word.greek;
+                wordSpan.dataset.id = word.id;
+                wordSpan.dataset.index = index;
+                
+                // Agregar número pequeño
+                const numberSpan = document.createElement('span');
+                numberSpan.className = 'word-number';
+                numberSpan.textContent = word.id;
+                wordSpan.appendChild(numberSpan);
+                
+                // Estilo de entrada escalonada
+                wordSpan.style.animationDelay = `${index * 0.1}s`;
+                
+                // Eventos
+                wordSpan.addEventListener('click', () => showWordTooltip(wordSpan, word));
+                wordSpan.addEventListener('mouseenter', () => {
+                    if (state.currentTooltipWord !== word.id) {
+                        wordSpan.classList.add('active');
+                    }
+                });
+                wordSpan.addEventListener('mouseleave', () => {
+                    if (state.currentTooltipWord !== word.id) {
+                        wordSpan.classList.remove('active');
+                    }
+                });
+                
+                greekVerse.appendChild(wordSpan);
+                
+                // Agregar espacio después de cada palabra excepto la última
+                if (index < verseData.words.length - 1) {
+                    const spaceSpan = document.createElement('span');
+                    spaceSpan.textContent = ' ';
+                    greekVerse.appendChild(spaceSpan);
+                }
+            });
+        }
+
+        // Mostrar tooltip para palabra griega
+        function showWordTooltip(element, wordData) {
+            // Actualizar estado
+            state.exploredWords.add(wordData.id);
+            state.currentTooltipWord = wordData.id;
+            updateProgress();
+            
+            // Resaltar la palabra
+            document.querySelectorAll('.greek-word').forEach(w => {
+                w.classList.remove('active');
+            });
+            element.classList.add('active');
+            
+            // Actualizar contenido del tooltip
+            tooltipGreek.textContent = wordData.greek;
+            tooltipMeaning.textContent = wordData.meaning;
+            tooltipPronunciation.textContent = wordData.pronunciation;
+            tooltipGrammar.textContent = wordData.grammar;
+            tooltipFunction.textContent = wordData.function;
+            
+            // Posicionar tooltip
+            const rect = element.getBoundingClientRect();
+            const tooltipWidth = 320;
+            const tooltipHeight = 200;
+            
+            // Calcular posición
+            let left = rect.left + (rect.width / 2) - (tooltipWidth / 2);
+            let top = rect.top - tooltipHeight - 10;
+            
+            // Ajustar si se sale de la pantalla
+            if (left < 20) left = 20;
+            if (left + tooltipWidth > window.innerWidth - 20) {
+                left = window.innerWidth - tooltipWidth - 20;
+            }
+            
+            if (top < 20) {
+                top = rect.bottom + 10;
+            }
+            
+            // Aplicar posición
+            wordTooltip.style.left = `${left}px`;
+            wordTooltip.style.top = `${top}px`;
+            
+            // Mostrar tooltip
+            wordTooltip.classList.add('show');
+            
+            // Pronunciar la palabra
+            pronounceWord(wordData.meaning);
+            
+            // Efecto de partículas (simulado)
+            createParticles(element);
+        }
+
+        // Ocultar tooltip
+        function hideTooltip() {
+            wordTooltip.classList.remove('show');
+            state.currentTooltipWord = null;
+            
+            // Quitar resaltado de todas las palabras
+            document.querySelectorAll('.greek-word').forEach(w => {
+                w.classList.remove('active');
+            });
+        }
+
+        // Actualizar barra de progreso
+        function updateProgress() {
+            const exploredCount = state.exploredWords.size;
+            const totalWords = verseData.words.length;
+            const percentage = (exploredCount / totalWords) * 100;
+            
+            wordsExploredEl.textContent = exploredCount;
+            progressFill.style.width = `${percentage}%`;
+            
+            // Mostrar mensaje si se exploraron todas
+            if (exploredCount === totalWords && totalWords > 0) {
+                showTemporaryMessage('¡Felicidades! Has explorado todas las palabras del versículo.');
+            }
+        }
+
+        // Leer versículo completo
+        function readVerseAloud() {
+            if (state.isReading) return;
+            
+            state.isReading = true;
+            readVerseBtn.innerHTML = '<i class="fas fa-volume-up pulse"></i> Reproduciendo...';
+            readVerseBtn.disabled = true;
+            
+            // Resaltar palabras secuencialmente
+            const words = greekVerse.querySelectorAll('.greek-word');
+            const wordDelay = 1500; // 1.5 segundos por palabra
+            
+            words.forEach((word, index) => {
+                setTimeout(() => {
+                    // Resaltar palabra actual
+                    document.querySelectorAll('.greek-word').forEach(w => {
+                        w.classList.remove('active');
+                    });
+                    word.classList.add('active');
+                    
+                    // Marcar como explorada
+                    const wordId = parseInt(word.dataset.id);
+                    state.exploredWords.add(wordId);
+                    updateProgress();
+                    
+                    // Pronunciar la palabra
+                    const wordData = verseData.words.find(w => w.id === wordId);
+                    if (wordData) {
+                        pronounceWord(wordData.meaning);
+                    }
+                    
+                    // Quitar resaltado después de un tiempo
+                    setTimeout(() => {
+                        word.classList.remove('active');
+                    }, wordDelay - 300);
+                }, index * wordDelay);
+            });
+            
+            // Restaurar botón después de terminar
+            setTimeout(() => {
+                state.isReading = false;
+                readVerseBtn.innerHTML = '<i class="fas fa-play-circle"></i> Escuchar versículo completo';
+                readVerseBtn.disabled = false;
+                showTemporaryMessage('Versículo completo leído.');
+            }, words.length * wordDelay);
+        }
+
+        // Pronunciar palabra usando síntesis de voz
+        function pronounceWord(text) {
+            if ('speechSynthesis' in window) {
+                // Cancelar cualquier habla en curso
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'es-ES';
+                utterance.rate = 0.8;
+                utterance.pitch = 1;
+                utterance.volume = 1;
+                
+                // Seleccionar voz en español si está disponible
+                const voices = speechSynthesis.getVoices();
+                const spanishVoice = voices.find(v => v.lang.startsWith('es'));
+                if (spanishVoice) {
+                    utterance.voice = spanishVoice;
+                }
+                
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Mostrar/ocultar traducción
+        function toggleTranslation() {
+            state.translationVisible = !state.translationVisible;
+            
+            if (state.translationVisible) {
+                translationContent.classList.add('show');
+                showTranslationBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Ocultar traducción';
+                
+                // Ocultar análisis gramatical si está visible
+                if (state.grammarVisible) {
+                    toggleGrammar();
+                }
+            } else {
+                translationContent.classList.remove('show');
+                showTranslationBtn.innerHTML = '<i class="fas fa-language"></i> Mostrar traducción';
+            }
+        }
+
+        // Mostrar/ocultar análisis gramatical
+        function toggleGrammar() {
+            state.grammarVisible = !state.grammarVisible;
+            
+            if (state.grammarVisible) {
+                grammarContent.classList.add('show');
+                analyzeGrammarBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Ocultar análisis';
+                
+                // Ocultar traducción si está visible
+                if (state.translationVisible) {
+                    toggleTranslation();
+                }
+            } else {
+                grammarContent.classList.remove('show');
+                analyzeGrammarBtn.innerHTML = '<i class="fas fa-search"></i> Analizar gramática';
+            }
+        }
+
+        // Configurar event listeners
+        function setupEventListeners() {
+            // Botón para leer versículo
+            readVerseBtn.addEventListener('click', readVerseAloud);
+            
+            // Botón para mostrar/ocultar traducción
+            showTranslationBtn.addEventListener('click', toggleTranslation);
+            
+            // Botón para mostrar/ocultar análisis gramatical
+            analyzeGrammarBtn.addEventListener('click', toggleGrammar);
+            
+            // Cerrar tooltip
+            tooltipClose.addEventListener('click', hideTooltip);
+            
+            // Cerrar tooltip al hacer clic fuera
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.greek-word') && !e.target.closest('.word-tooltip')) {
+                    hideTooltip();
+                }
+            });
+            
+            // Cerrar tooltip con tecla Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    hideTooltip();
+                }
+            });
+        }
+
+        // Animación de entrada del versículo
+        function animateVerse() {
+            const words = greekVerse.querySelectorAll('.greek-word');
+            words.forEach((word, index) => {
+                word.style.opacity = '0';
+                word.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    word.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    word.style.opacity = '1';
+                    word.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+
+        // Crear efecto de partículas (simulado)
+        function createParticles(element) {
+            const rect = element.getBoundingClientRect();
+            const colors = ['#f39c12', '#3498db', '#27ae60'];
+            
+            // Crear 5 partículas
+            for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: fixed;
+                    width: 6px;
+                    height: 6px;
+                    background-color: ${colors[Math.floor(Math.random() * colors.length)]};
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 999;
+                    left: ${rect.left + rect.width/2}px;
+                    top: ${rect.top + rect.height/2}px;
+                    opacity: 0.8;
+                `;
+                
+                document.body.appendChild(particle);
+                
+                // Animar partícula
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 30 + 20;
+                const duration = Math.random() * 300 + 400;
+                
+                particle.animate([
+                    { 
+                        transform: 'translate(0, 0) scale(1)', 
+                        opacity: 0.8 
+                    },
+                    { 
+                        transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`, 
+                        opacity: 0 
+                    }
+                ], {
+                    duration: duration,
+                    easing: 'ease-out'
+                });
+                
+                // Remover partícula después de la animación
+                setTimeout(() => {
+                    document.body.removeChild(particle);
+                }, duration);
+            }
+        }
+
+        // Mostrar mensaje temporal
+        function showTemporaryMessage(message) {
+            const messageEl = document.createElement('div');
+            messageEl.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%) translateY(100px);
+                background-color: var(--success);
+                color: white;
+                padding: 12px 25px;
+                border-radius: 50px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 1000;
+                opacity: 0;
+                transition: all 0.3s ease;
+                font-weight: 500;
+            `;
+            messageEl.textContent = message;
+            
+            document.body.appendChild(messageEl);
+            
+            // Mostrar
+            setTimeout(() => {
+                messageEl.style.transform = 'translateX(-50%) translateY(0)';
+                messageEl.style.opacity = '1';
+            }, 10);
+            
+            // Ocultar después de 3 segundos
+            setTimeout(() => {
+                messageEl.style.transform = 'translateX(-50%) translateY(100px)';
+                messageEl.style.opacity = '0';
+                
+                // Remover después de la animación
+                setTimeout(() => {
+                    document.body.removeChild(messageEl);
+                }, 300);
+            }, 3000);
+        }
+
+        // Cargar voces para síntesis de voz
+        if ('speechSynthesis' in window) {
+            speechSynthesis.onvoiceschanged = () => {
+                console.log('Voces cargadas:', speechSynthesis.getVoices().length);
+            };
+        }
+    </script>
+</body>
+</html>
