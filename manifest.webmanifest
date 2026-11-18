@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Griego Koiné — Seminario Teológico Bautista de Cuba Oriental",
+  "short_name": "Griego Koiné",
+  "description": "Curso de Griego Koiné 2026–2027 del Seminario Teológico Bautista de Cuba Oriental.",
+  "lang": "es",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f8",
+  "theme_color": "#14243a",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./assets/logo-stbcor.png",
+      "sizes": "240x240",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
