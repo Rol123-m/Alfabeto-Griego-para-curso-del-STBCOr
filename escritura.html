@@ -521,7 +521,44 @@ img,svg,video,canvas{max-width:100%}
  .koine-accent-grid,.koine-summary-grid{grid-template-columns:1fr}
 }
 
-</style>
+
+        /* Paneles de Juan 1:1: apertura fluida sin recortar el contenido */
+        .hidden-content {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height .35s ease, opacity .25s ease, margin-top .25s ease;
+        }
+        .hidden-content.show {
+            margin-top: 25px;
+            opacity: 1;
+        }
+        .verse-controls .verse-btn[aria-expanded="true"] {
+            background: rgba(255,255,255,.32);
+            border-color: rgba(255,255,255,.7);
+        }
+        @media (max-width: 600px) {
+            .verse-controls {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr);
+                gap: 10px;
+            }
+            .verse-controls .verse-btn {
+                min-width: 0;
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+                white-space: normal;
+                line-height: 1.35;
+                padding: 13px 15px;
+            }
+            .translation-box {
+                padding: 17px;
+                overflow-wrap: anywhere;
+            }
+        }
+
+    </style>
 
 <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/png" href="./assets/logo-stbcor.png"><meta name="theme-color" content="#14243a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Griego Koiné"></head>
 <body>
@@ -763,6 +800,10 @@ img,svg,video,canvas{max-width:100%}
         document.addEventListener('DOMContentLoaded', () => {
             renderGreekVerse();
             setupEventListeners();
+            translationContent.setAttribute('aria-hidden', 'true');
+            grammarContent.setAttribute('aria-hidden', 'true');
+            showTranslationBtn.setAttribute('aria-expanded', 'false');
+            analyzeGrammarBtn.setAttribute('aria-expanded', 'false');
             updateProgress();
             
             // Efecto de entrada
@@ -962,39 +1003,45 @@ img,svg,video,canvas{max-width:100%}
             }
         }
 
-        // Mostrar/ocultar traducción
-        function toggleTranslation() {
-            state.translationVisible = !state.translationVisible;
-            
-            if (state.translationVisible) {
-                translationContent.classList.add('show');
-                showTranslationBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Ocultar traducción';
-                
-                // Ocultar análisis gramatical si está visible
-                if (state.grammarVisible) {
-                    toggleGrammar();
-                }
+        // Mostrar/ocultar paneles con alturas dinámicas (evita que el contenido quede recortado).
+        function setPanelVisibility(panel, button, visible, label, openLabel, icon) {
+            panel.classList.toggle('show', visible);
+            panel.setAttribute('aria-hidden', String(!visible));
+            button.setAttribute('aria-expanded', String(visible));
+            button.innerHTML = visible
+                ? '<i class="fas fa-eye-slash"></i> ' + openLabel
+                : '<i class="fas fa-' + icon + '"></i> ' + label;
+
+            if (visible) {
+                panel.style.maxHeight = 'none';
+                const fullHeight = panel.scrollHeight;
+                panel.style.maxHeight = fullHeight + 'px';
+                requestAnimationFrame(() => {
+                    if (panel.classList.contains('show')) panel.style.maxHeight = 'none';
+                });
             } else {
-                translationContent.classList.remove('show');
-                showTranslationBtn.innerHTML = '<i class="fas fa-language"></i> Mostrar traducción';
+                panel.style.maxHeight = '0px';
+            }
+            button.classList.toggle('pulse', visible);
+        }
+
+        function toggleTranslation() {
+            const visible = !translationContent.classList.contains('show');
+            setPanelVisibility(translationContent, showTranslationBtn, visible,
+                'Mostrar traducción', 'Ocultar traducción', 'language');
+            if (visible && grammarContent.classList.contains('show')) {
+                setPanelVisibility(grammarContent, analyzeGrammarBtn, false,
+                    'Analizar gramática', 'Ocultar análisis', 'search');
             }
         }
 
-        // Mostrar/ocultar análisis gramatical
         function toggleGrammar() {
-            state.grammarVisible = !state.grammarVisible;
-            
-            if (state.grammarVisible) {
-                grammarContent.classList.add('show');
-                analyzeGrammarBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Ocultar análisis';
-                
-                // Ocultar traducción si está visible
-                if (state.translationVisible) {
-                    toggleTranslation();
-                }
-            } else {
-                grammarContent.classList.remove('show');
-                analyzeGrammarBtn.innerHTML = '<i class="fas fa-search"></i> Analizar gramática';
+            const visible = !grammarContent.classList.contains('show');
+            setPanelVisibility(grammarContent, analyzeGrammarBtn, visible,
+                'Analizar gramática', 'Ocultar análisis', 'search');
+            if (visible && translationContent.classList.contains('show')) {
+                setPanelVisibility(translationContent, showTranslationBtn, false,
+                    'Mostrar traducción', 'Ocultar traducción', 'language');
             }
         }
 
