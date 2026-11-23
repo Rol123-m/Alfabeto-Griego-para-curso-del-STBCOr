@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&display=swap');
         /* RESET Y VARIABLES */
         :root {
             --primary: #4361ee;
@@ -504,11 +505,73 @@
             }
         }
     
+
+/* Tipografía griega politónica: espacio vertical para respiraciones y acentos */
+.koine-accent,.koine-example{
+ font-family:'Noto Serif','Noto Serif Greek','Georgia',serif;
+ font-kerning:normal;
+ font-variant-ligatures:normal;
+ line-height:2.15;
+ padding-top:.7rem;
+ padding-bottom:.85rem;
+ overflow:visible;
+}
+.koine-accent{
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ vertical-align:middle;
+ min-height:3.15rem;
+ margin:.35rem .25rem;
+ padding-left:.85rem;
+ padding-right:.85rem;
+ font-size:clamp(1.1rem,4vw,1.35rem);
+ white-space:normal;
+}
+.koine-accent-item{padding:1.35rem .9rem 1.1rem;overflow:visible}
+.koine-accent-grid{align-items:stretch}
+.koine-example{overflow-wrap:anywhere}
+@media(max-width:480px){
+ .koine-accent{min-height:3.3rem;line-height:2.25;padding:.75rem .8rem 1rem}
+ .koine-example{font-size:1.05rem;padding:1rem .75rem}
+}
+
 /* Navegación común del curso */
 .course-nav{position:sticky;top:0;z-index:9999;background:#14243a;color:#fff;box-shadow:0 4px 18px rgba(10,25,45,.16);font-family:Arial,sans-serif}.course-nav-inner{max-width:1200px;margin:auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}.course-nav a{color:#fff;text-decoration:none}.course-nav-brand{font-weight:700;letter-spacing:.04em;white-space:nowrap}.course-nav-links{display:flex;flex-wrap:wrap;gap:7px}.course-nav-links a{font-size:.82rem;padding:7px 10px;border-radius:7px;color:#e7edf4;transition:background .2s}.course-nav-links a:hover,.course-nav-links a:focus{background:#294b6d;color:#fff;outline:2px solid #d5ad65;outline-offset:1px}@media(max-width:700px){.course-nav-inner{align-items:flex-start;flex-direction:column;gap:6px;padding:10px 14px}.course-nav-links{gap:4px}.course-nav-links a{font-size:.76rem;padding:6px 8px}}
 
 /* Identidad institucional y curso 2026–2027 */
 .course-nav{position:sticky;top:0;z-index:9999;background:#14243a;color:#fff;box-shadow:0 4px 18px rgba(10,25,45,.16);font-family:Arial,sans-serif}.course-nav-inner{max-width:1200px;margin:auto;padding:9px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}.course-nav a{color:#fff;text-decoration:none}.course-nav-brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.03em}.course-nav-logo{width:48px;height:48px;object-fit:contain;border-radius:50%;background:#fff}.course-nav-title{display:flex;flex-direction:column;line-height:1.25}.course-nav-title small{font-size:.68rem;color:#e2c58e;font-weight:500;letter-spacing:.08em}.course-nav-links{display:flex;flex-wrap:wrap;gap:6px}.course-nav-links a{font-size:.82rem;padding:7px 9px;border-radius:7px;color:#e7edf4}.course-nav-links a:hover,.course-nav-links a:focus{background:#294b6d;color:#fff;outline:2px solid #d5ad65;outline-offset:1px}@media(max-width:700px){.course-nav-inner{align-items:flex-start;flex-direction:column;gap:7px;padding:9px 14px}.course-nav-logo{width:42px;height:42px}.course-nav-links{gap:4px}.course-nav-links a{font-size:.76rem;padding:6px 8px}}
+
+/* Ajustes de legibilidad y adaptación móvil */
+html{width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
+body{max-width:100%;overflow-x:hidden}
+img,svg,video,canvas{max-width:100%}
+.course-nav-inner{width:100%;min-width:0}
+.course-nav-brand{min-width:0;white-space:normal}
+.course-nav-links{min-width:0;max-width:100%;flex-wrap:wrap}
+.course-nav-links a{white-space:nowrap}
+@media(max-width:700px){
+ .course-nav{position:relative}
+ .course-nav-inner{padding:10px 14px;gap:9px}
+ .course-nav-links{display:flex;gap:5px}
+ .course-nav-links a{font-size:.75rem;padding:7px 9px}
+}
+@media(max-width:480px){
+ .course-nav-logo{width:38px;height:38px}
+ .course-nav-title{font-size:.9rem}
+ .koine-container{padding-left:12px;padding-right:12px}
+ .koine-header{padding:1.5rem 1rem;margin-bottom:1.25rem}
+ .koine-header h1{font-size:clamp(1.55rem,7vw,2rem);line-height:1.2}
+ .koine-subtitle{font-size:1rem}
+ .koine-card,.koine-quiz{padding:1rem}
+ .koine-card-title{font-size:1.25rem;line-height:1.3;flex-wrap:wrap}
+ .koine-question{padding:1rem}
+ .koine-question p{font-size:1rem}
+ .koine-btn{width:100%;min-height:46px;padding:.8rem 1rem}
+ .koine-list li{gap:.55rem}
+ .koine-accent-grid,.koine-summary-grid{grid-template-columns:1fr}
+}
+
 </style>
 
 <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/png" href="./assets/logo-stbcor.png"><meta name="theme-color" content="#14243a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Griego Koiné"></head>
