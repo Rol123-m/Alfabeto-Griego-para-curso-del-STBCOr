@@ -109,7 +109,8 @@
             box-shadow: var(--shadow-light);
             transition: var(--transition);
             border: 1px solid rgba(0, 0, 0, 0.05);
-            height: 100%;
+            height: auto;
+            min-width: 0;
             margin-bottom: 0;
         }
 
@@ -572,7 +573,119 @@ img,svg,video,canvas{max-width:100%}
  .koine-accent-grid,.koine-summary-grid{grid-template-columns:1fr}
 }
 
-</style>
+
+        /* Corrección de flujo: el examen siempre ocupa su propia sección */
+        .koine-container {
+            display: flow-root;
+            width: 100%;
+            min-width: 0;
+        }
+        .koine-grid {
+            position: relative;
+            display: grid;
+            align-items: start;
+            width: 100%;
+            min-width: 0;
+            margin-bottom: 2.5rem;
+        }
+        .koine-main,
+        .koine-side {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .koine-card {
+            position: relative;
+            height: auto;
+            min-width: 0;
+            transform: none;
+        }
+        .koine-card:hover {
+            transform: translateY(-2px);
+        }
+        .koine-quiz {
+            position: relative;
+            display: flow-root;
+            clear: both;
+            isolation: isolate;
+            z-index: 1;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            margin: 2rem 0 3rem;
+            overflow: visible;
+        }
+        .koine-question {
+            position: relative;
+            display: block;
+            width: 100%;
+            min-width: 0;
+            clear: both;
+            overflow-wrap: anywhere;
+        }
+        .koine-options {
+            width: 100%;
+            min-width: 0;
+        }
+        .koine-option,
+        .koine-option-label {
+            min-width: 0;
+            max-width: 100%;
+            overflow-wrap: anywhere;
+        }
+        .koine-option-label > span:last-child {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+        .koine-result,
+        .koine-score {
+            position: relative;
+            width: 100%;
+            overflow-wrap: anywhere;
+        }
+        @media (max-width: 640px) {
+            .koine-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            .koine-main,
+            .koine-side {
+                gap: 1rem;
+            }
+            .koine-quiz {
+                margin: 1.5rem 0 2rem;
+                padding: 1rem;
+            }
+            .koine-quiz-title {
+                font-size: clamp(1.25rem, 6vw, 1.6rem);
+                line-height: 1.25;
+                flex-wrap: wrap;
+                gap: .5rem;
+            }
+            .koine-question {
+                margin-bottom: 1rem;
+                padding: .9rem;
+            }
+            .koine-option {
+                align-items: flex-start;
+                padding: .85rem;
+            }
+            .koine-option-label {
+                align-items: flex-start;
+                gap: .25rem;
+            }
+            .koine-option-letter {
+                margin-right: .55rem;
+            }
+            .koine-btn {
+                white-space: normal;
+                line-height: 1.35;
+            }
+        }
+
+    </style>
 
 <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/png" href="./assets/logo-stbcor.png"><meta name="theme-color" content="#14243a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Griego Koiné"></head>
 <body>
