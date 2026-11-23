@@ -198,17 +198,23 @@
 
         /* Contenido oculto */
         .hidden-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.8s ease;
+            display: none;
+            width: 100%;
+            min-width: 0;
             margin-top: 0;
             opacity: 0;
         }
 
         .hidden-content.show {
-            max-height: 2400px;
+            display: block;
             margin-top: 25px;
             opacity: 1;
+            animation: panelReveal .22s ease-out;
+        }
+
+        @keyframes panelReveal {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .translation-box {
@@ -558,6 +564,28 @@ img,svg,video,canvas{max-width:100%}
             }
         }
 
+            /* Paneles de Juan 1:1: apertura fiable sin alturas máximas ni recortes */
+        .hidden-content {
+            display: none !important;
+            max-height: none !important;
+            height: auto !important;
+            overflow: visible !important;
+            width: 100%;
+        }
+        .hidden-content.show {
+            display: block !important;
+            max-height: none !important;
+            height: auto !important;
+            overflow: visible !important;
+            margin-top: 20px;
+            opacity: 1;
+        }
+        .translation-box,
+        .grammar-analysis {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
     </style>
 
 <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/png" href="./assets/logo-stbcor.png"><meta name="theme-color" content="#14243a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Griego Koiné"></head>
@@ -589,10 +617,10 @@ img,svg,video,canvas{max-width:100%}
                 <button class="verse-btn primary" id="readVerseBtn">
                     <i class="fas fa-play-circle"></i> Escuchar versículo completo
                 </button>
-                <button class="verse-btn" id="showTranslationBtn">
+                <button type="button" class="verse-btn" id="showTranslationBtn" onclick="window.toggleTranslationPanel && window.toggleTranslationPanel()">
                     <i class="fas fa-language"></i> Mostrar traducción
                 </button>
-                <button class="verse-btn" id="analyzeGrammarBtn">
+                <button type="button" class="verse-btn" id="analyzeGrammarBtn" onclick="window.toggleGrammarPanel && window.toggleGrammarPanel()">
                     <i class="fas fa-search"></i> Analizar gramática
                 </button>
             </div>
@@ -1003,7 +1031,7 @@ img,svg,video,canvas{max-width:100%}
             }
         }
 
-        // Mostrar/ocultar paneles con alturas dinámicas (evita que el contenido quede recortado).
+        // Mostrar/ocultar paneles de traducción y gramática.
         function setPanelVisibility(panel, button, visible, label, openLabel, icon) {
             panel.classList.toggle('show', visible);
             panel.setAttribute('aria-hidden', String(!visible));
@@ -1011,17 +1039,6 @@ img,svg,video,canvas{max-width:100%}
             button.innerHTML = visible
                 ? '<i class="fas fa-eye-slash"></i> ' + openLabel
                 : '<i class="fas fa-' + icon + '"></i> ' + label;
-
-            if (visible) {
-                panel.style.maxHeight = 'none';
-                const fullHeight = panel.scrollHeight;
-                panel.style.maxHeight = fullHeight + 'px';
-                requestAnimationFrame(() => {
-                    if (panel.classList.contains('show')) panel.style.maxHeight = 'none';
-                });
-            } else {
-                panel.style.maxHeight = '0px';
-            }
             button.classList.toggle('pulse', visible);
         }
 
@@ -1045,16 +1062,14 @@ img,svg,video,canvas{max-width:100%}
             }
         }
 
+        // Exponer funciones para que los botones también funcionen con activación directa.
+        window.toggleTranslationPanel = toggleTranslation;
+        window.toggleGrammarPanel = toggleGrammar;
+
         // Configurar event listeners
         function setupEventListeners() {
             // Botón para leer versículo
             readVerseBtn.addEventListener('click', readVerseAloud);
-            
-            // Botón para mostrar/ocultar traducción
-            showTranslationBtn.addEventListener('click', toggleTranslation);
-            
-            // Botón para mostrar/ocultar análisis gramatical
-            analyzeGrammarBtn.addEventListener('click', toggleGrammar);
             
             // Cerrar tooltip
             tooltipClose.addEventListener('click', hideTooltip);
