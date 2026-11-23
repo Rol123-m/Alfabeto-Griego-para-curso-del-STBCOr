@@ -1,4 +1,4 @@
-const CACHE_NAME = "stbcor-griego-2026-2027-v4";
+const CACHE_NAME = "stbcor-griego-2026-2027-v5";
 const APP_SHELL = [
   "./",
   "./index.html",
